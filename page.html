@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FedEx Styled Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      overflow-x: hidden;
+      background: #6cc24a;
+      position: relative;
+    }
+
+    /* Blurred background circles */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .circle1 {
+      width: 300px;
+      height: 300px;
+      background: #a5db68;
+      top: 10%;
+      left: 10%;
+    }
+
+    .circle2 {
+      width: 200px;
+      height: 200px;
+      background: #b6f76b;
+      top: 40%;
+      left: 20%;
+    }
+
+    .circle3 {
+      width: 250px;
+      height: 250px;
+      background: #d0e96c;
+      top: 25%;
+      left: 35%;
+    }
+
+    /* Triangle overlay */
+    .overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom left, #4d148c, #f26a21);
+      clip-path: polygon(100% 0, 100% 100%, 40% 100%);
+      z-index: 1;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: relative;
+      z-index: 2;
+      background-color: #4b0082;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-item {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .arrow {
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .fedex-logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .fedex-logo .fed { color: white; }
+    .fedex-logo .ex { color: orange; }
+
+    .login-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .login-item img {
+      height: 30px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 100px 20px;
+      color: black;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .box-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      gap: 20px;
+    }
+
+    .box {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 100px 15px 25px;
+      width: 160px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .box img {
+      display: none;
+    }
+
+    .box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      z-index: 0;
+    }
+
+    .box div {
+      z-index: 1;
+      position: relative;
+    }
+
+    .box.active {
+      border: 2px solid #fff;
+      outline: 2px solid #f96302;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    .track-form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 20px;
+    }
+
+    .track-form input {
+      padding: 15px;
+      width: 300px;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      font-size: 16px;
+    }
+
+    .track-form button {
+      background: #f96302;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .track-help {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .track-form {
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+      }
+
+      .track-form input, .track-form button {
+        width: 100%;
+        border-radius: 5px;
+      }
+
+      .track-form input {
+        margin-bottom: 10px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .nav-left, .nav-right {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .box-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .box {
+        width: 90%;
+        margin-bottom: 10px;
+        border-radius: 8px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Circles -->
+  <div class="circle circle1"></div>
+  <div class="circle circle2"></div>
+  <div class="circle circle3"></div>
+
+  <!-- Triangle Gradient Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="fedex-logo"><span class="fed">Fed</span><span class="ex">Ex</span></div>
+      <div class="nav-item">Shipping <span class="arrow">&#9660;</span></div>
+      <div class="nav-item">Tracking <span class="arrow">&#9660;</span></div>
+      <div class="nav-item">Design & Print <span class="arrow">&#9660;</span></div>
+      <div class="nav-item">Locations <span class="arrow">&#9660;</span></div>
+      <div class="nav-item">Support <span class="arrow">&#9660;</span></div>
+    </div>
+    <div class="nav-right">
+      <div class="login-item">
+        <div>Sign Up / Log In</div>
+        <img src="track.jpg" alt="Login">
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Ship, manage, track, deliver</h1>
+
+    <div class="box-container">
+      <div class="box" style="background-image: url('box1.jpg');">
+        <div>RATE & SHIP</div>
+      </div>
+      <div class="box active" style="background-image: url('box2.jpg');">
+        <div>TRACK</div>
+      </div>
+      <div class="box" style="background-image: url('box3.jpg');">
+        <div>LOCATIONS</div>
+      </div>
+    </div>
+
+    <div class="track-form">
+      <input type="text" placeholder="TRACKING ID">
+      <button>TRACK</button>
+    </div>
+
+    <div class="track-help">
+      MULTIPLE TRACKING NUMBERS | NEED HELP?
+    </div>
+  </div>
+
+</body>
+</html>
